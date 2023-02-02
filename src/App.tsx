@@ -1,5 +1,6 @@
 import React from "react";
 import { MainPage } from "./pages/MainPage";
+import { ZkeydFetcherPage } from "./pages/ZkeydFetcherPage";
 import "./styles.css";
 import {
   BrowserRouter as Router,
@@ -21,6 +22,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/" element={<Navigate to={"/"} replace={true} />} />
+          <Route path="/zkeyd" element={<ZkeydFetcherPage />} />
           <Route element={<>Not found</>} />
         </Routes>
       </div>
