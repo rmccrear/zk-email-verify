@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import KeyLister from './KeyLister';
 import Uploader from './Uploader';
 import Fetcher from './Fetcher';
-import { uncompressZkeydTarball, downloadFromFilename } from './uncompress-and-store';
+import { uncompressZkeydTarball } from './uncompress-and-store';
+import { downloadFromFilename } from '../../helpers/zkp';
 import {
   updateIndexForLocalFiles,
   getIndexForLocalFiles,
