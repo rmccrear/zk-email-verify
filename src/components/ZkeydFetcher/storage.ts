@@ -1,4 +1,5 @@
 import localforage from "localforage";
+import { arrayBuffer } from "stream/consumers";
 
 type StoredFile = {
     name: string,
@@ -53,4 +54,8 @@ const blobUrlForLocalFile = async (key: string) => {
   return url;
 }
 
-export { updateIndexForLocalFiles, getIndexForLocalFiles, blobUrlForLocalFile, type StoredFile };
+const storeArrayBuffer = async (filename: string, arrayBuffer: ArrayBuffer) => {
+  await localforage.setItem(filename, arrayBuffer)
+}
+
+export { updateIndexForLocalFiles, getIndexForLocalFiles, blobUrlForLocalFile, storeArrayBuffer, type StoredFile };

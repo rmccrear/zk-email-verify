@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import KeyLister from './KeyLister';
 import Uploader from './Uploader';
 import Fetcher from './Fetcher';
-import { uncompressAndStore, downloadFromFilename } from './uncompress-and-store';
+import { uncompressZkeydTarball, downloadFromFilename } from './uncompress-and-store';
 import {
   updateIndexForLocalFiles,
   getIndexForLocalFiles,
+  storeArrayBuffer,
   StoredFile
 } from './storage';
 
@@ -18,6 +19,7 @@ export default function ZkeydFetcherDemo() {
     }
     effect();
   }, []);
+
   const handleUpload = async (e: any) => {
     e.preventDefault();
     const file = e.target.files[0];
@@ -28,17 +30,17 @@ export default function ZkeydFetcherDemo() {
       throw new Error("Wrong file type, expected tar.gz file.");
     }
     const arrayBuffer = await file.arrayBuffer();
-    const fName = await uncompressAndStore(filename, arrayBuffer);
-
-    console.log("update index for ", fName);
-    await updateIndexForLocalFiles(fName, "uploaded file " + filename);
+    const tarFile = await uncompressZkeydTarball(arrayBuffer);
+    await storeArrayBuffer(tarFile.name, tarFile.buffer);
+    console.log("update index for ", tarFile.name);
+    await updateIndexForLocalFiles(tarFile.name, "uploaded from desktop" + tarFile.name);
     const localFileListing = await getIndexForLocalFiles();
     setKeyList(localFileListing);
   };
-  const handleFetch = async (filename: string) => {
-    const fName = await downloadFromFilename(filename, true);
 
-    await updateIndexForLocalFiles(fName, "fetched file " + filename);
+  const handleFetch = async (filename: string) => {
+    await downloadFromFilename(filename, true);
+    await updateIndexForLocalFiles(filename, "fetched file " + filename);
     const localFileListing = await getIndexForLocalFiles();
     setKeyList(localFileListing);
   }
