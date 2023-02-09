@@ -13,12 +13,11 @@ const getUncompressedTestFile = (): ArrayBuffer => {
 }
 
 describe('Uncompress GZ file', () => {
-  test('uncompresss a file', async () => {
+  test('Uncompresss a GZ file', async () => {
     const decoder = new StringDecoder('utf8');
-    const compressedArrayBuffer = getCompressedTestFile();
-    const expectedArrayBuffer = getUncompressedTestFile();
+    const compressedArrayBuffer: ArrayBuffer = getCompressedTestFile();
+    const expectedArrayBuffer: ArrayBuffer = getUncompressedTestFile();
     const expectedString = decoder.write(Buffer.from(expectedArrayBuffer));
-    console.log(compressedArrayBuffer);
     const uncompressedArrayBuffer = await uncompress(compressedArrayBuffer);
     const uncompressedString = decoder.write(Buffer.from(uncompressedArrayBuffer));
     expect(uncompressedString).toBe(expectedString);
