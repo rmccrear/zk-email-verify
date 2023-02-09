@@ -48,7 +48,7 @@ const LabeledTextArea: React.FC<{
           {warning}
         </span>
       )}
-      <textarea style={style} title={disabled ? disabledReason : ""} disabled={disabled} value={value} onChange={onChange} />
+      <textarea aria-label={label} style={style} title={disabled ? disabledReason : ""} disabled={disabled} value={value} onChange={onChange} />
 
       {secret && <div className="secret">Hover to reveal public info sent to chain</div>}
     </LabeledTextAreaContainer>
