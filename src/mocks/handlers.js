@@ -3,7 +3,7 @@ import { rest } from 'msw'
 import { loadURL } from '../helpers/zkp'
 import fs from 'fs';
 
-const getCompressedTestFile = (): ArrayBuffer => {
+const getCompressedTestFile = () => {
   const buffer = fs.readFileSync(`${__dirname}/../__fixtures__/compressed-files/compressed.txt.gz`);
   return buffer;
 }

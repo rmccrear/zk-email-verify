@@ -2,8 +2,19 @@ import { StringDecoder } from "string_decoder";
 import localforage from "localforage";
 import { downloadFromFilename, downloadProofFiles } from "./zkp";
 
+import { server } from '../mocks/server.js'
+
 // this is mocked in __mocks__/localforage.ts
 jest.mock("localforage");
+// Establish API mocking before all tests.
+beforeAll(() => server.listen())
+
+// Reset any request handlers that we may add during the tests,
+// so they don't affect other tests.
+afterEach(() => server.resetHandlers())
+
+// Clean up after the tests are finished.
+afterAll(() => server.close())
 
 // localforage should be storing ArrayBuffers.
 // We can use this function to simplify checking the mocked value of the ArrayBuffer.
