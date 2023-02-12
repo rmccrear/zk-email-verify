@@ -85,7 +85,7 @@
     "@types/node": "^18.0.6",
     "msw": "^1.0.0",
     "nodemon": "^2.0.19",
-    "puppeteer": "~18.1",
+    "puppeteer": "18.1",
     "ts-node-dev": "^2.0.0"
   },
   "packageManager": "yarn@3.2.3"
