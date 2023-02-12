@@ -10,7 +10,17 @@ jobs:
           pkg-manager: yarn
       - run:
           command: yarn test
-          name: Run tests
+          name: Run unit tests
+      - run:
+          command: yarn run build
+          name: Build app
+      - run:
+          command: yarn run start-e2e-test-server
+          name: Start test server
+          background: true
+      - run:
+          command: yarn test:e2e
+          name: Run e2e tests
 workflows:
   build_test: 
     jobs:

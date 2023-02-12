@@ -50,9 +50,9 @@ describe("App.js", () => {
 
   beforeAll(async () => {
     browser = await puppeteer.launch({
-      // headless: true,
-      headless: false,
-      slowMo: 100
+      headless: true,
+      // headless: false,
+      // slowMo: 100
     });
     page = await browser.newPage();
     await gotToPageAndEnterInputs(page, emailInputSelector, ethInputSelector, testEmailText, testEthAddress);

@@ -55,6 +55,7 @@
     "both-build": "react-scripts build && next build",
     "next-build": "next build",
     "test": "react-scripts test --runInBand --testPathIgnorePatterns='e2e'",
+    "start-e2e-test-server": "serve -s build -p 3000",
     "test:e2e": "CI=true react-scripts test --runInBand --testPathPattern='e2e' --detectOpenHandles",
     "eject": "react-scripts eject",
     "compile": "node circuits/scripts/compile.js",
