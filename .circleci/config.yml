@@ -2,16 +2,12 @@ version: 2.1
 orbs:
   node: circleci/node@5.1.0
 jobs:
-  build:
+  run_tests:
     docker:
       - image: cimg/node:16.19
     steps:
       - checkout
       - run: node --version
-  run_tests:
-    executor: node/default # use the default executor defined within the orb
-    steps:
-      - checkout
       - node/install-packages:
           pkg-manager: yarn
       - run:
