@@ -23,9 +23,15 @@ jobs:
       - run:
           command: yarn test:e2e-ui
           name: Run e2e tests for UI
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/
       # - run:
       #     command: yarn test:e2e-zkp
       #     name: Run e2e tests for zkp
+      #     environment:
+      #       JEST_JUNIT_OUTPUT_DIR: ./reports/
+      - store_test_results:
+          path: ./reports/
 workflows:
   build_test: 
     jobs:
