@@ -75,38 +75,6 @@ describe("App.js", () => {
     const status = await page.$eval("[data-testid='status-not-started']", e => e.attributes['data-testid'].value);
     expect(status).toBe("status-not-started");
   }, 1000);
-  xit("should start download and run zkproof after entering inputs and click", async () => {
-    await page.waitForSelector("[data-testid='status-not-started']");
-    console.log("starting e2e test...this will take up to 10 minutes and consume bandwidth and cpu time")
-    const proveButtonSelector = "button[data-testid='prove-button']";
-    await page.click(proveButtonSelector);
-    // starting download
-    console.log("starting download...this will take up to 10 minutes and consume bandwidth");
-    const proveButtonIsDisabled = await page.$eval(proveButtonSelector, button => button.disabled);
-    expect(proveButtonIsDisabled).toBe(true);
-
-    let status;
-    await page.waitForSelector("[data-testid='status-downloading-proof-files']");
-    status = await page.$eval("[data-testid='status-downloading-proof-files']", e => e.attributes['data-testid'].value);
-    expect(status).toBe("status-downloading-proof-files");
-
-    await page.waitForSelector("[data-testid='status-generating-proof']", {timeout: downloadTimeout});
-    console.log("finished download...starting proof");
-    console.log("starting proof...this will take up to 10 minutes and consume cpu time");
-    status = await page.$eval("[data-testid='status-generating-proof']", e => e.attributes['data-testid'].value);
-    expect(status).toBe("status-generating-proof");
-
-    await page.waitForSelector("[data-testid='status-done']", {timeout: proofTimeout});
-    status = await page.$eval("[data-testid='status-done']", e => e.attributes['data-testid'].value);
-    expect(status).toBe("status-done");
-
-    // report times
-    const downloadTime = await page.$eval("[data-testid='download-time']", e => e.textContent);
-    const proofTime = await page.$eval("[data-testid='proof-time']", e => e.textContent);
-    console.log("Completed download and proof");
-    console.log("download in ms took", downloadTime);
-    console.log("proof in ms took", proofTime);
-  }, proofTimeout + downloadTimeout + 1000);
 
   afterAll(() => browser.close());
 });
