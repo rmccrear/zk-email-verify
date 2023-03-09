@@ -27,6 +27,9 @@ jobs:
           name: Run e2e tests for UI
           environment:
             JEST_JUNIT_OUTPUT: reports/e2e-ui-test-results.xml
+      - run:
+          command: cd src/contracts curl -L https://foundry.paradigm.xyz | bash && PATH=$PATH:$HOME/.foundry/bin  foundryup --version nightly && PATH=$PATH:$HOME/.foundry/bin forge test
+          name: Install foundry and forge test
 
       # - run:
       #     command: yarn test:e2e-zkp
