@@ -33,7 +33,8 @@ contract TwitterUtilsTest is Test {
     // See https://stackoverflow.com/a/2049510/3977093 -- you can even have international characters with RFC 6532
     // Our regex should just disallow most of these emails, but they may end up taking more than two bytes
     // ASCII should fit in 2 bytes but emails may not be ASCII
-    assertEq(bytes32(bytes(byteList)), bytes32(bytes(value)));
+    // assertEq(bytes32(bytes(byteList)), bytes32(bytes(value)));
+    assertEq(bytes32(bytes(byteList)), bytes32(bytes(intended_value)));
     console.logString(byteList);
   }
 }
