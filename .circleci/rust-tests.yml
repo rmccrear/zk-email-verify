@@ -1,0 +1,17 @@
+version: '2.1'
+orbs:
+  rust: circleci/rust@1.6.0
+jobs:
+  steps:
+    - checkout
+    - run:
+      name: download foundry
+      command: curl -L https://foundry.paradigm.xyz | bash
+      working_directory: src/contracts
+    - run: 
+      name: run foundryup
+      command: foundryup
+      working_directory: src/contracts
+    - run:
+      name: run foundry tests
+      command: forge test --via-ir
