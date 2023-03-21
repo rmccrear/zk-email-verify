@@ -9,13 +9,10 @@ jobs:
       - image: ghcr.io/foundry-rs/foundry:latest
     steps:
       - checkout
-      # - run:
-      #     command: curl -L https://foundry.paradigm.xyz | bash
-      #     name: download foundry
-      - run: 
-          name: run foundryup
-          command: foundryup
-          working_directory: src/contracts
+      # - run: 
+      #     name: run foundryup
+      #     command: foundryup
+      #     working_directory: src/contracts
       - run:
           name: run foundry tests
           command: forge test --via-ir
