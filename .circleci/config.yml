@@ -5,7 +5,8 @@ orbs:
 jobs:
   run_forge_tests:
     docker:
-      - image: cimg/rust:1.68.0-node
+      # - image: cimg/rust:1.68.0-node
+      - image: ghcr.io/foundry-rs/foundry:latest
     steps:
       - checkout
       # - run:
@@ -22,8 +23,7 @@ jobs:
 
   run_unit_and_e2e_tests:
     docker:
-      # - image: cimg/node:16.19-browsers
-      - image: ghcr.io/foundry-rs/foundry:latest
+      - image: cimg/node:16.19-browsers
     steps:
       - checkout
       - run: node --version
