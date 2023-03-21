@@ -8,9 +8,9 @@ jobs:
       - image: cimg/rust:1.68.0-node
     steps:
       - checkout
-      - run:
-          command: curl -L https://foundry.paradigm.xyz | bash
-          name: download foundry
+      # - run:
+      #     command: curl -L https://foundry.paradigm.xyz | bash
+      #     name: download foundry
       - run: 
           name: run foundryup
           command: foundryup
@@ -22,7 +22,8 @@ jobs:
 
   run_unit_and_e2e_tests:
     docker:
-      - image: cimg/node:16.19-browsers
+      # - image: cimg/node:16.19-browsers
+      - image: ghcr.io/foundry-rs/foundry:latest
     steps:
       - checkout
       - run: node --version
