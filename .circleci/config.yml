@@ -3,6 +3,23 @@ orbs:
   node: circleci/node@5.1.0
   rust: circleci/rust@1.6.0
 jobs:
+  run_forge_tests:
+    docker:
+      - image: cimg/rust:1.68.0-node
+    steps:
+      - checkout
+      - run:
+          command: curl -L https://foundry.paradigm.xyz | bash
+          name: download foundry
+      - run: 
+          name: run foundryup
+          command: foundryup
+          working_directory: src/contracts
+      - run:
+          name: run foundry tests
+          command: forge test --via-ir
+          working_directory: src/contracts
+
   run_unit_and_e2e_tests:
     docker:
       - image: cimg/node:16.19-browsers
@@ -40,3 +57,4 @@ workflows:
   build_test: 
     jobs:
       - run_unit_and_e2e_tests
+      - run_forge_tests
